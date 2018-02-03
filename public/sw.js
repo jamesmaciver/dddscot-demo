@@ -1,48 +1,7 @@
+importScripts('js/idb.js');
 importScripts('js/rest-of-sw.js');
 const serviceWorkerUrl = new URL(self.location);
 
-self.addEventListener('install', event => {
-    console.log(`[ServiceWorker:install] Installing service worker.`);
-    self.skipWaiting();
-
-    event.waitUntil(
-        caches.open(`v1`).then(cache => {
-          return cache.addAll([
-            'css/site.css',
-            'css/spectre-icons.min.css',
-            'css/spectre.min.css',
-            'img/ddd-logo.png',
-            'img/ddd-icon.png',
-            'img/davidrankin.jpg',
-            'img/donwibier.jpg',
-            'img/filipw.jpg',
-            'img/galiyawarrier.jpg',
-            'img/garyfleming.jpg',
-            'img/garypark.jpg',
-            'img/heatherburns.jpg',
-            'img/ismailmayat.jpg',
-            'img/jamesmaciver.jpg',
-            'img/joannaisabelleolszewska.jpg',
-            'img/joestead.jpg',
-            'img/jonathanchannon.jpg',
-            'img/kevinsmith.jpg',
-            'img/martingoodfellow.jpg',
-            'img/mattellis.jpg',
-            'img/matteoemili.jpg',
-            'img/paulaikman.jpg',
-            'img/petershaw.jpg',
-            'img/robinminto.jpg',
-            'img/stuartashworth.jpg',
-            'img/placeholder.jpg',
-            'img/marniemccormack.jpg',
-            'js/register-service-worker.js',
-            'index.html',
-            'schedule.html'
-          ])
-          .catch(error => console.error('Failed to install service worker', error));
-        })
-      );
-});
 
 self.addEventListener('fetch', event => {
     console.log(`[ServiceWorker:fetch] Fetch Event: `, event);
@@ -53,20 +12,66 @@ self.addEventListener('fetch', event => {
     
     if (urlBelongsToOrigin) {
         if (isStaticResourceRequest) {
+            console.log(`[ServiceWorker:fetch] Processing static resource fetch event.`);
+
             event.respondWith(
-                caches.open(`v1`).then(cache => {
-                    return cache.match(event.request).then(cacheResponse => {
-                        return cacheResponse || fetch(event.request).then(networkResponse => {
-                            cache.put(event.request, networkResponse.clone());
-                            return networkResponse;
-                        });
-                    });
-                })
+                applyStaticResourceCachingStrategy(event)
             );
         } else {
+            console.log(`[ServiceWorker:fetch] Processing dynamic data fetch event.`, event);
+            
+            const accessingSessions = requestUrl.indexOf('/api/sessions') > -1;
+            
+            let promiseToResolve;
+    
+            if (accessingSessions) {
+                promiseToResolve = getSessions(event.request);
+            } else {
+                promiseToResolve = fetch(event.request);
+            }
             event.respondWith(
-                fetch(event.request)
+                promiseToResolve
             );
         }
     }
 });
+
+const getSessions = (request) => {
+    return getSessionsFromDb().then((resultSet) => {
+        if(resultSet && resultSet.length > 0) {
+            return returnAsJsonResponse(resultSet);
+        }
+        return fetch(request)
+                .then(response => response.json())
+                .then(sessions => 
+                {
+                    const promises = [];
+                    sessions.forEach(session => {
+                        promises.push(addSessionToDb(session));
+                    });
+                    return Promise.all(promises).then(() => {
+                        return returnAsJsonResponse(sessions);
+                    });
+                });
+    });
+}
+
+const getSessionsFromDb = () => {
+    return openDb()
+        .then(db => 
+                db.transaction('sessions')
+                    .objectStore('sessions')
+                    .getAll()
+            );
+}
+
+const addSessionToDb = (session) => {
+    return openDb()
+        .then(db =>
+                db.transaction('sessions', 'readwrite')
+                    .objectStore('sessions')
+                    .put(session)
+                    .complete
+            );
+}
+
