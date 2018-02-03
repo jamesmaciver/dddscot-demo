@@ -1,0 +1,227 @@
+[
+  {
+    "title": "Interactive Development with Roslyn",
+    "abstract":
+      "It’s fair to say that most software developers very highly value the productivity boost that comes with being able to work in a development environment that provides a real-time feedback loop. Historically, C# has been far from that - as typically developers had to rebuild their projects after every change, and the process of finding issues in the code has always felt extremely heavy.\n                Roslyn compiler and Visual Studio 2017 introduced a lot exciting tools, improvements and APIs that help in this area. \n                In this talk, we will look at various techniques to leverage these interactive capabilities. We’ll explore the REPL and Interactive Window, scripting APIs, live Roslyn analyzers, a much improved Edit-and-Continue support and interactive testing, all of which will hopefully help your development workflow be much more productive.",
+    "speaker": "Filip W",
+    "startsAt": "2017-02-10T09:30:00",
+    "location": "Room 1"
+  },
+  {
+    "title": "Adding a Layer of Chocolate(y)",
+    "abstract":
+      "In this session, we will learn from from experienced package author, Chocolatey.org moderator and project contributor Gary on how to automate the installation and configuration of all the software you need to get your job done.  This will include the use of open source software tools Chocolatey and Boxstarter.\n\n        Find out how to wrap each of your tools and applications in a well-specified Chocolatey package. Learn about common pitfalls and get an inside perspective on the package moderation process so that you can publish to the public repository on Chocolatey.org with confidence.\n        \n        Learn how to orchestrate the installation of all your packages (including reboots) with Boxstarter. Build up a fully configured developer machine from scratch, or redeploy your test environment with ease and reliability.\n        \n        However, Chocolatey is not only about packaging of existing, 3rd Party Applications.  You can also apply the exact same techniques to allow your customers to download, install and upgrade your software with ease.\n        \n        This talk is rated 200-300 with a target audience of all Windows-based developers who want to spend more time coding and less time reinstalling software. ",
+    "speaker": "Gary Park",
+    "startsAt": "2017-02-10T09:30:00",
+    "location": "Room 2"
+  },
+  {
+    "title": "BigCode: Transforming Enterprise Systems",
+    "abstract":
+      "Dealing with giant code based is a privilege and a vocation, like restoring the Mona Lisa in the dark with a chisel. Except there is another approach, using service oriented architecture coupled with a focus on the customer to decouple and free your teams from legacy ennui. Come along and find out how cloud can be the lever for the change you want to see.",
+    "speaker": "Marnie McCormack",
+    "startsAt": "2017-02-10T09:30:00",
+    "location": "Room 3"
+  },
+  {
+    "title": "Writing simpler ASP.NET Core",
+    "abstract":
+      "Ever since ASP.NET MVC came out in 2007 many developers have  been involved in a cargo cult of writing web applications in a Controller-Service-Repository design.  This has been repeated over and over for nearly 10 years.  This design reinforces everything that the SOLID design pattern promotes but actually what is the effect of following this?  Developers bring in large dependencies to support this design, add complexity to their applications and potentially cause a performance issue.  We'll go through various approaches to improve your web application design, one better than the last but arrive at a destination where you can simplify your architecture, simplify your code, remove dependencies, increase performance and use  \"functional\" approaches in C# whilst still allowing you to write clean code that negates the need for IoC containers and mocks in your tests.",
+    "speaker": "Jonathan Channon",
+    "startsAt": "2017-02-10T10:30:00",
+    "location": "Room 1"
+  },
+  {
+    "title": "Breaking The Common Myths Around Artificial Intelligence",
+    "abstract":
+      "In this presentation, we will be talking about 5 main common myths around Artificial Intelligence as well as what it can actually deliver at this moment in time. We will discuss and see a few demos of interesting AI examples that span beyond chatbots and personal assistants, and that should leave you with some practical ideas on how you can get started in this space.",
+    "speaker": "Galiya Warrier",
+    "startsAt": "2017-02-10T10:30:00",
+    "location": "Room 2"
+  },
+  {
+    "title": "My Maker Journey",
+    "abstract":
+      "How I went from software engineer to hardware hacker. My journey in the maker movement from learning electronics in solitary to working in makerspaces globally and starting the Glasgow Makers and Hardware Hackers group. I'll discuss some of the projects I've been involved in and my experiences of being part of the community. I'll also talk about why you should become a hardware hacker and get involved in the maker movement too.",
+    "speaker": "Martin Goodfellow",
+    "startsAt": "2017-02-10T10:30:00",
+    "location": "Room 3"
+  },
+  {
+    "title": "React.js and Friends",
+    "abstract":
+      "React.js has seen some stellar growth over the past couple of years, and its adoption doesn't seem to be slowing down.\n            In this session I'll give a short introduction to the framework, and share some of my experiences of introducing React into new & legacy projects.\n\n            As part of the session, I'll try to answer the following points (time allowing!):\n\n            - What is React? Where did it come from?\n\n            - What does a React component look like? What's JSX?\n\n            - What does a typical workflow look like? What are the options?\n\n            - How do projects like React Router and Redux fit into the picture? Are they hard to integrate?\n\n            - What are the use cases for React?\n\n            - Where can I see React used in production?\n\n            - What's the future for React?\n\n            - How do I get started?!",
+    "speaker": "Paul Aikman",
+    "startsAt": "2017-02-10T11:30:00",
+    "location": "Room 1"
+  },
+  {
+    "title": "Security in Cloud-Native",
+    "abstract":
+      "Cloud-native is an approach that fully exploits the advantages of the cloud - it's how you build and run your applications to allow easy scaling and continuous deployment. You may have seen the Twelve-Factor App methodology (https://12factor.net/) for developing applications that embrace a cloud-native philosophy but with that, there's little or no guidance on security.\n\n\n\n        Security can't be an afterthought and cloud-native is no different. This talk looks at how to approach security for an app deployed to the cloud. Can you forget about infrastructure security? Where should you focus your attention? Is cloud-native more secure?\n        \n         \n        \n        We'll consider the similarities and differences between traditional apps and cloud-native apps. We'll look at how you can avoid the most common security vulnerabilities that affect cloud apps and we'll look at approaches applicable to both Linux and Windows. You'll come away knowing how to be more secure in cloud-native.",
+    "speaker": "Robin Minto",
+    "startsAt": "2017-02-10T11:30:00",
+    "location": "Room 2"
+  },
+  {
+    "title": "Teaching an old dog new tricks",
+    "abstract":
+      "In this session we will get down and dirty with clean code.  \n\nExpanding on Uncle Bob’s teachings this session will give you practical hints and tips to help you practice clean code. We will cover what clean code is, why you should be writing it and how to write it. If you’ve been a victim of “wtf code”, or even guilty of writing it yourself, then this is a must attend talk for you. \n\nDisclaimer: there may be swearing!",
+    "speaker": "Ismail Mayat",
+    "startsAt": "2017-02-10T11:30:00",
+    "location": "Room 3"
+  },
+  {
+    "title":
+      "Beyond C# 7.0 - point releases, reference semantics and nullability",
+    "abstract":
+      "No, we’re not going to look at C# 7.0. That’s ancient history. Instead, we’re going to look at the recent point releases - C# 7.1 and 7.2.\n\n        Unsurprisingly for point releases, the feature list isn’t huge, but there are a couple of very interesting new items in there. Notably, let’s pick apart “reference semantics for value types”. Firstly, what does that even mean? Secondly, let’s take a look at how this fairly major set of new features work, and how we can use this in our own apps to improve performance by reducing allocations and garbage collection overhead. Immutable structs, readonly references and of course, Span<T>, a type safe and efficient way of accessing chunks of memory. Just think - creating sub-strings without any new allocations!\n        \n        And after all that, we’ll check out the preview of the big headline feature of C# 8.0 - nullable reference types. Wait, aren’t reference types already nullable?",
+    "speaker": "Matt Ellis",
+    "startsAt": "2017-02-10T13:30:00",
+    "location": "Room 1"
+  },
+  {
+    "title": "APIs on the Scale of Decades",
+    "abstract":
+      "\"APIs are hard. They are pretty much ship now, regret later.\" -- Chet Haase.\n\n        What do Greek philosophy, early video games, and Japanese bullet trains tell us about how we should design our APIs?\n        \n        Writing any old API is easy. Writing an API that can evolve to meet your needs over the coming months, years, and even decades; now that's hard. We'll look at some common practices and try to see where they go wrong, some misunderstood techniques and how to use them better, and some less common practices that might be useful.\n        \n        Let me give you some good advice that'll help you evolve your APIs, and some big ideas that might provoke some interesting thoughts.",
+    "speaker": "Gary Fleming",
+    "startsAt": "2017-02-10T13:30:00",
+    "location": "Room 2"
+  },
+  {
+    "title": "Keyboards? Where we’re going, we don’t need keyboards.",
+    "abstract":
+      "One of the cornerstones in Microsoft’s digital assistant Cortana are cognitive services. Instead of the traditional Screen / Keyboard / Mouse combination for user interaction with your application, it offers different ways of handling user input.\n\n        Think about vision, speech and language – the new way of communicating with your devices – but also how to analyze and structure these kinds of user input.\n        \n        This session will give you an introduction on the Cognitive Services Platform – show how it can help your end-users – and with live coding examples you will experience how easy it is to start using this incredibly cool API.\n        \n        ",
+    "speaker": "Don Wibier",
+    "startsAt": "2017-02-10T13:30:00",
+    "location": "Room 3"
+  },
+  {
+    "title": "Learning Kotlin as a C# Developer",
+    "abstract":
+      "There are hundreds of programming languages out there now, more seem to crop up every week, trying to learn them all is an impossible task. Learning Kotlin, like any language, presented various challenges. Is my code idiomatic? Is this a good use of the language, or am I abusing the syntax to solve my problem? \n\n        We'll start with a basic introduction to Kotlin, how to get up and running with relative ease, and then we'll start comparing simple applications written in C# and seeing how we could write them in Kotlin instead. \n        \n        Finally, we'll share ideas to help you start writing Kotlin immediately, without rewriting all of your existing .NET code. ",
+    "speaker": "Joe Stead",
+    "startsAt": "2017-02-10T14:30:00",
+    "location": "Room 1"
+  },
+  {
+    "title": "Progressive Web Apps",
+    "abstract":
+      "Mobile apps, no \"install\" required. Progressive Web Apps should load instantly, respond quickly, and feel native to a device. I will discuss the technology and techniques behind bringing our web apps to a user's home screen.",
+    "speaker": "James Maciver",
+    "startsAt": "2017-02-10T14:30:00",
+    "location": "Room 2"
+  },
+  {
+    "title": "Discover Intelligent Vision Softwares",
+    "abstract":
+      "Intelligent Vision Softwares are present everywhere in our Society from street surveillance cameras to airport e-gates, from drones to AUVs, from m-health services to Facebook apps. Behind the scenes, these new technologies including social media, cybersecurity systems, or autonomous agents require softwares with capabilities of processing vast amounts of complex data, and in particular visual data such as images, videos, etc. in a computationally efficient and dependable way.  \n\nThis talk aims to present the 'why' and 'how' of intelligent vision softwares deployed in constrained and unconstrained environments. Participants are expected to get new perspective about the intelligent vision softwares' challenges and solutions.",
+    "speaker": "Joanna Isabelle Olszewska",
+    "startsAt": "2017-02-10T14:30:00",
+    "location": "Room 3"
+  },
+  {
+    "title": "Scripting and Tooling with Node.js",
+    "abstract":
+      "JavaScript is the language of the browser, but for many years now its reach has been expanding to the point where we have Atwood’s “Law”: “any application that can be written in JavaScript, will eventually be written in JavaScript.” (@codinghorror)\n\n        So why is it that many developers with powerful JavaScript skills don’t use it outside the browser? Backed with the millions of packages on npm, a JavaScript developer can easily accomplish many of the tasks that a “traditional scripting language” would have been used for.\n        \n        This talk will be an exploration of how easy it can be for a dev, familiar with JavaScript, to create their own tools and commands.",
+    "speaker": "David Rankin",
+    "startsAt": "2017-02-10T15:30:00",
+    "location": "Room 1"
+  },
+  {
+    "title": "Building APIs with Azure Functions",
+    "abstract":
+      "Functions as a Service (FaaS) is the next trending buzzword, in this session we'll look at the advantages of using FaaS and how we can take advantage of Azure Functions to build our APIs.\n\n        Through this demo lead session we'll see examples of how we can take advantage of HttpTriggers, Routing, Proxies and API definition to build a set of rich functions as the source for our APIs.",
+    "speaker": "Kevin Smith",
+    "startsAt": "2017-02-10T15:30:00",
+    "location": "Room 2"
+  },
+  {
+    "title": "Developing for privacy and data protection",
+    "abstract":
+      "In our volatile and uncertain political times, developers can play a crucial role in protecting the safety and privacy of those who use our software, services, and apps. Whether you enjoy the support of an employer or work on your own as a freelancer, an informed regard for data protection must become a part of your development workflow.\n\n        This talk will provide a practical toolkit which draws on current and upcoming data protection regulation (including GDPR), development frameworks, and recognised best practices in protecting personal data to inspire attendees to integrate a healthy approach to privacy into everything they do.\n        \n        Those who attend the talk will learn how to:\n        \n        -think proactively about developing for privacy and user protection;\n        \n        -adopt protective workflows and business practices;\n        \n        -understand that privacy and user protection are everyone's responsibility;\n        \n        -feel empowered to challenge things which may put people at risk.\n        \n        This is not a technical talk; it will be applicable across all platforms and disciplines.",
+    "speaker": "Heather Burns",
+    "startsAt": "2017-02-10T15:30:00",
+    "location": "Room 3"
+  },
+  {
+    "title": "Typescript for the C# Developer",
+    "abstract":
+      "Believe it or not, there are still a large number of .NET developers these days, that are happy to stay in the server domain, writing code only in C#\n\n        While that may be your thing (and I'm not going to stop you) .... you owe it to yourself to at least explore the world of front end code.\n        \n        The problem is, the front end is...  well, JavaScript, and we all know how that's panning out for the millions of those that use it everyday.\n        \n        Fear not however.  There is a way you can explore programming in the browser, and still maintain all this nice stuff your used to in C# code, things like Type safety, OOP programming and generics.\n        \n        That Way is called  TYPESCRIPT\n        \n        In this [Quite fast paced] presentation, I'll show you some of the things that Typescript gives you to ease the pain and keep you clear of the world of JavaScript code.  You'll see some of the newer ES6/7 Constructs that Typescript now embraces, but more importantly....\n        \n        You'll get to play in the browser, while still thinking and working in a very back-end programmer like way.\n        \n        I'll not be teaching you the Typescript Language, nor will I be showing you any majorly cool coding tricks, I'll simply just be showing you that coming out of the server room, doesn't have to be painful at all.",
+    "speaker": "Peter Shaw",
+    "startsAt": "2017-02-10T16:30:00",
+    "location": "Room 1"
+  },
+  {
+    "title": "Containers jumpstart from a DevOps perspective",
+    "abstract":
+      "Containers are really a thing, but how many organisations are actually using them in production, every day? Why isn’t yours among these?\n\n        It’s not because Containers are not reliable or too complex. It is also not because they require some special technology stack to deploy on brand new hardware – they are actually quite nimble. It is often because (like with all new technologies) there is some sort of misinformation around them.\n        \n        They are actually really invaluable tools not just for new applications but also for existing ones, as they fit very well with a packaged distribution model for example.\n        \n        So let’s try to shed some light on these, from a different point of view: the DevOps perspective.",
+    "speaker": "Matteo Emili",
+    "startsAt": "2017-02-10T16:30:00",
+    "location": "Room 2"
+  },
+  {
+    "title": "Accessibility in Modern Web Applications",
+    "abstract":
+      "The web’s original mission was about opening up information and communication to everyone, regardless of where you might be in the world and regardless of who is accessing it.\n\n        In today’s landscape of modern JavaScript frameworks and single-page applications, we face a whole host of new challenges when building with inclusivity and web accessibility in mind to keep this mission alive.\n        \n        In this talk, we’ll focus on the biggest obstacles these applications impose on people with disabilities and what steps we can take to ensure all users have a fantastic experience. Our discussions will be kept framework-agnostic with the techniques and approaches able to be applied to all applications.",
+    "speaker": "Stuart Ashworth",
+    "startsAt": "2017-02-10T16:30:00",
+    "location": "Room 3"
+  },
+  {
+    "title": "Lightning Talks 1",
+    "abstract":
+      "Short informative talks. Line up TBA.",
+    "speaker": "Mixed",
+    "startsAt": "2017-02-10T09:30:00",
+    "location": "Room 4"
+  },
+  {
+    "title": "Your Career as a Software Developer Panel",
+    "abstract":
+      "Panel discussing Software Development careers.",
+    "speaker": "Mixed",
+    "startsAt": "2017-02-10T10:30:00",
+    "location": "Room 4"
+  },
+  {
+    "title": "Lightning Talks 2",
+    "abstract":
+      "Short informative talks. Line up TBA.",
+    "speaker": "Mixed",
+    "startsAt": "2017-02-10T11:30:00",
+    "location": "Room 4"
+  },
+  {
+    "title": "Lightning Talks 3",
+    "abstract":
+      "Short informative talks. Line up TBA.",
+    "speaker": "Mixed",
+    "startsAt": "2017-02-10T13:30:00",
+    "location": "Room 4"
+  },
+  {
+    "title": "Lightning Talks 4",
+    "abstract":
+      "Short informative talks. Line up TBA.",
+    "speaker": "Mixed",
+    "startsAt": "2017-02-10T14:30:00",
+    "location": "Room 4"
+  },
+  {
+    "title": "What makes a Graduate Employable",
+    "abstract":
+      "Panel discussing Graduate Developers.",
+    "speaker": "Stuart Ashworth",
+    "startsAt": "2017-02-10T15:30:00",
+    "location": "Room 4"
+  },
+  {
+    "title": "Lightning Talks 5",
+    "abstract":
+      "Short informative talks. Line up TBA.",
+    "speaker": "Mixed",
+    "startsAt": "2017-02-10T16:30:00",
+    "location": "Room 4"
+  }
+]

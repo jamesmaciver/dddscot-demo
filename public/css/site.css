@@ -1,0 +1,37 @@
+.ddd-navbar{
+    padding: 10px;
+    border-bottom: 1px solid #005DB8;
+}
+
+.center-align{
+    text-align: center;
+}
+
+.sticky-navbar {
+    position: sticky; 
+    z-index:100; 
+    background-color:white; 
+    top:0;
+}
+
+.sticky-content-header {
+    position: sticky; 
+    z-index:100; 
+    background-color:white; 
+    top:66;
+    padding-top:15px;
+}
+
+.tile-content > .tile-title {
+    color: #005DB8;
+    font-weight:500;
+    font-size:18px;
+}
+
+.tile-subtitle {
+    color: black;
+    font-weight:100;
+}
+.push-down-from-nav{
+    padding-top:15px;
+}

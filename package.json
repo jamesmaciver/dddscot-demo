@@ -1,0 +1,12 @@
+{
+    "name": "ddd-scot",
+    "version": "1.0.0",
+    "main": "server.js",
+  "dependencies": {
+    "express": "^4.16.2",
+    "web-push": "^3.2.5"
+  },
+  "engines": {
+    "node": "8.9.4"
+  }
+}
