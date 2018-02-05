@@ -53,12 +53,31 @@
                 <button class="btn btn-primary float-right" id="send-announcement" style="margin-top:10px; margin-bottom:10px;">Send Announcement</button>
             </div>
         </div>
+        <div id="announcements"></div>
     </div>
 
+    <script src="/js/idb.js"></script>
     <script src="/js/register-service-worker.js"></script>
 
     <script>
-        document.querySelector('#send-announcement').addEventListener('click', event => {
+        const openDb = () => {
+            return idb.open('dddscot', 2, (upgradeDB) => {
+                console.log(`[ServiceWorker:activation] Migrating db from  v${upgradeDB.oldVersion} to v1.`);
+                    
+                if(!upgradeDB.objectStoreNames.contains('sessions')){
+                    upgradeDB.createObjectStore('sessions', {
+                        keyPath: 'title'
+                    });
+                } 
+                if(!upgradeDB.objectStoreNames.contains('announcements')){
+                    upgradeDB.createObjectStore('announcements', {
+                        keyPath: 'timestamp'
+                    });
+                }         
+            });
+        }
+
+        document.querySelector('#send-announcement').addEventListener('click', (event) => {
             event.preventDefault();
 
             const announcementContent = document.getElementById('announcement-text').value;
@@ -78,7 +97,49 @@
                 return response;
             })
             .catch(error => alert('Failed to send annoucement'));
-        });        
+        });
+        
+        const createAnnouncementMarkup = (announcement) => {
+            return `
+                <div class="tile tile-centered columns announcement">
+                    <div class="tile-icon">
+                        <div class="example-tile-icon">
+                            <i class="icon icon-message centered"></i>
+                        </div>
+                    </div>
+                    <div class="tile-content">
+                        <div class="tile-title">${announcement.message}</div>
+                        <div class="tile-subtitle text-gray">James Maciver · ${new Date(announcement.timestamp).toLocaleString()}</div>
+                    </div>
+                </div>`;
+        }
+
+        const setAnnouncementsDivContent = (announcementsMarkup) => {
+            const announcementsDiv = document.getElementById('announcements');
+            announcementsDiv.innerHTML = announcementsMarkup;
+        }
+
+        const renderAnnouncements = () => {
+            openDb().then(db => {
+                    return db.transaction('announcements', 'readwrite')
+                                .objectStore('announcements')
+                                .getAll();
+                })
+                .then(announcements => {
+                    const announcementsMarkup = 
+                        announcements.map(announcement => createAnnouncementMarkup(announcement)).join('');
+                    setAnnouncementsDivContent(announcementsMarkup);
+                })   
+        }
+
+        navigator.serviceWorker.addEventListener('message', event => {
+            const message = event.data;
+            if (message.type === 'NEW_ANNOUNCEMENT') {
+                renderAnnouncements();
+            }
+        });
+
+        renderAnnouncements();
     </script>
 </body>
 

@@ -1,86 +1,43 @@
 importScripts('js/idb.js');
 importScripts('js/rest-of-sw.js');
-const serviceWorkerUrl = new URL(self.location);
 
-self.addEventListener('fetch', event => {
-    console.log(`[ServiceWorker:fetch] Fetch Event: `, event);
-    
-    const requestUrl = event.request.url;
-    const urlBelongsToOrigin = requestUrl.indexOf(serviceWorkerUrl.origin) > -1;
-    const isStaticResourceRequest = requestUrl.indexOf('/api/') === -1;
-    
-    if (urlBelongsToOrigin) {
-
-        const isGETRequest = event.request.method === 'GET';
-        const isPOSTRequest = event.request.method === 'POST';
-        
-        if(isGETRequest) {
-
-            if (isStaticResourceRequest) {
-                console.log(`[ServiceWorker:fetch] Processing static resource fetch event.`);
-
-                event.respondWith(
-                    applyStaticResourceCachingStrategy(event)
-                );
-            } else {
-                console.log(`[ServiceWorker:fetch] Processing dynamic data fetch event`, event);
-                
-                const accessingSessions = requestUrl.indexOf('/api/sessions') > -1;
-                
-                let promiseToResolve;
-        
-                if (accessingSessions) {
-                    promiseToResolve = getSessions(event.request);
-                } else {
-                    promiseToResolve = fetch(event.request);
-                }
-                event.respondWith(
-                    promiseToResolve
-                );
-            }
-        } else if (isPOSTRequest) {
-            console.log(`[ServiceWorker:fetch] Processing data POST fetch event.`, event);
-            event.respondWith(fetch(event.request));
-        }
+self.addEventListener('push', event => {
+    if (!(self.Notification && self.Notification.permission === 'granted')) {
+        return;
     }
+    const data = event.data.json();
+    
+    addAnnouncementToDb(data)
+        .then(() => clients.matchAll())
+        .then(clients => {
+            clients.forEach(client => {
+                client.postMessage({
+                    type: 'NEW_ANNOUNCEMENT'
+                })
+            });
+        });
+
+    const title = data.title || "N/A title";
+    const body = data.message || "N/A body.";
+    const icon = "img/ddd-icon.png";
+
+    event.waitUntil(
+        self.registration.showNotification(
+            title, 
+            { body, icon, requireInteraction: true, vibrate: [100, 50, 100, 50] })
+    );
 });
 
-const getSessions = (request) => {
-    return getSessionsFromDb().then((resultSet) => {
-        if(resultSet && resultSet.length > 0) {
-            return returnAsJsonResponse(resultSet);
-        }
-        return fetch(request)
-                .then(response => response.json())
-                .then(sessions => 
-                {
-                    const promises = [];
-                    sessions.forEach(session => {
-                        promises.push(addSessionToDb(session));
-                    });
-                    return Promise.all(promises).then(() => {
-                        return returnAsJsonResponse(sessions);
-                    });
-                });
+self.addEventListener('notificationclick', (event) => {
+    event.notification.close();
+    event.waitUntil(clients.openWindow('/announcements.html'));
+});
+
+const addAnnouncementToDb = (announcement) => {
+    return openDb().then(db => {
+        return db.transaction('announcements', 'readwrite')
+            .objectStore('announcements')
+            .put(announcement)
+            .complete;
     });
-}
-
-const getSessionsFromDb = () => {
-    return openDb()
-        .then(db => 
-                db.transaction('sessions')
-                    .objectStore('sessions')
-                    .getAll()
-            );
-}
-
-const addSessionToDb = (session) => {
-    return openDb()
-        .then(db =>
-                db.transaction('sessions', 'readwrite')
-                    .objectStore('sessions')
-                    .put(session)
-                    .complete
-            );
-}
-
+};

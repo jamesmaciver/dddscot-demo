@@ -32,6 +32,10 @@
     color: black;
     font-weight:100;
 }
-.push-down-from-nav{
+.push-down-from-nav {
     padding-top:15px;
+}
+
+.announcement {
+    margin-top: 25px;
 }
