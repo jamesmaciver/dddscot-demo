@@ -1,0 +1,25 @@
+{
+    "short_name": "DDD Scot",
+    "name": "DDD Scotland 2018",
+    "icons": [
+      {
+        "src": "img/ddd-icon.png",
+        "type": "image/png",
+        "sizes": "144x144"
+      },
+      {
+        "src": "img/ddd-icon-192.png",
+        "type": "image/png",
+        "sizes": "192x192"
+      },
+      {
+        "src": "img/ddd-icon-512.png",
+        "type": "image/png",
+        "sizes": "512x512"
+      }
+    ],
+    "background_color": "#005DB8",
+    "theme_color": "#005DB8",
+    "display": "standalone",
+    "start_url": "index.html"
+  }
