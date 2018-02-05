@@ -93,6 +93,47 @@ self.addEventListener('fetch', event => {
     }
 });
 
+self.addEventListener('push', event => {
+    if (!(self.Notification && self.Notification.permission === 'granted')) {
+        return;
+    }
+    const data = event.data.json();
+    
+    addAnnouncementToDb(data)
+        .then(() => clients.matchAll())
+        .then(clients => {
+            clients.forEach(client => {
+                client.postMessage({
+                    type: 'NEW_ANNOUNCEMENT'
+                })
+            });
+        });
+
+    const title = data.title || "N/A title";
+    const body = data.message || "N/A body.";
+    const icon = "img/ddd-icon.png";
+
+    event.waitUntil(
+        self.registration.showNotification(
+            title, 
+            { body, icon, requireInteraction: true, vibrate: [100, 50, 100, 50] })
+    );
+});
+
+self.addEventListener('notificationclick', (event) => {
+    event.notification.close();
+    event.waitUntil(clients.openWindow('/announcements.html'));
+});
+
+const addAnnouncementToDb = (announcement) => {
+    return openDb().then(db => {
+        return db.transaction('announcements', 'readwrite')
+            .objectStore('announcements')
+            .put(announcement)
+            .complete;
+    });
+};
+
 const getSessions = (request) => {
     return getSessionsFromDb().then((resultSet) => {
         if(resultSet && resultSet.length > 0) {
@@ -157,6 +198,30 @@ const openDb = () => {
                 keyPath: 'timestamp'
             });
         }     
+    });
+}
+
+const getPendingAnnouncementsFromDb = () => {
+    return openDb().then(db => {
+        return db.transaction('announcements')
+                .objectStore('announcements')
+                .getAll()
+                .then((announcements) => Promise.resolve(announcements.filter(announcement => announcement.isPending)));
+    })
+}
+
+const markPendingAnnouncementsAsDelivered = () => {
+    return openDb().then(db => {
+        const transaction = db.transaction('announcements', 'readwrite');
+        transaction.objectStore('announcements')
+            .iterateCursor(cursor => {
+                if (!cursor) return;
+                const announcement = cursor.value;
+                announcement.isPending = false;
+                cursor.update(announcement);
+                cursor.continue();
+            });
+        return transaction.complete;
     });
 }
 

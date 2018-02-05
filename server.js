@@ -22,13 +22,15 @@ webpush.setVapidDetails(
 app.get('/api/sessions', (req, res) => res.send(sessions));
 
 app.post('/api/announcements', (req, res) => {
-    const announcement = req.body;
+    const announcements = req.body;
     subscriptions.forEach(subscription => {
-        webpush.sendNotification(subscription, JSON.stringify({
-            title: 'DDD Scot Announcement',
-            message: announcement.message,
-            timestamp: new Date().getTime(),
-        })).catch(error => console.error(error));
+        announcements.forEach(announcement => {
+            webpush.sendNotification(subscription, JSON.stringify({
+                title: 'New Announcement',
+                message: announcement.message,
+                timestamp: announcement.timestamp || new Date().getTime(),
+            })).catch(error => console.error(error));
+        });
     });
     res.send(JSON.stringify({ data: { success: true } }));
 });

@@ -59,7 +59,7 @@
     <script src="/js/idb.js"></script>
     <script src="/js/register-service-worker.js"></script>
 
-    <script>
+    <script>  
         const openDb = () => {
             return idb.open('dddscot', 2, (upgradeDB) => {
                 console.log(`[ServiceWorker:activation] Migrating db from  v${upgradeDB.oldVersion} to v1.`);
@@ -80,23 +80,28 @@
         document.querySelector('#send-announcement').addEventListener('click', (event) => {
             event.preventDefault();
 
-            const announcementContent = document.getElementById('announcement-text').value;
+            const message = document.getElementById('announcement-text').value;
             document.getElementById('announcement-text').value = "";
 
-            fetch('/api/announcements', {
-                method: 'POST',
-                headers: {
-                    'Content-Type': 'application/json'
-                },
-                body: JSON.stringify({
-                    message: announcementContent
-                })
-            })
-            .then(response => {
-                console.log('Successfully sent announcement')
-                return response;
-            })
-            .catch(error => alert('Failed to send annoucement'));
+            openDb().then(db => {
+                const announcement = {
+                    timestamp: new Date().getTime(),
+                    message: message,
+                    isPending: true
+                };
+                
+                return db.transaction('announcements', 'readwrite')
+                            .objectStore('announcements')
+                            .put(announcement)
+                            .complete;
+            }).then(() => {
+                renderAnnouncements();
+                
+                navigator.serviceWorker.ready.then(serviceWorkerRegistration => {
+                    serviceWorkerRegistration.sync.register('send-queued-announcements');
+                });
+                
+            });
         });
         
         const createAnnouncementMarkup = (announcement) => {
@@ -110,6 +115,9 @@
                     <div class="tile-content">
                         <div class="tile-title">${announcement.message}</div>
                         <div class="tile-subtitle text-gray">James Maciver · ${new Date(announcement.timestamp).toLocaleString()}</div>
+                    </div>
+                    <div class="tile-action">
+                        <span class="text-warning">${announcement.isPending ? 'PENDING' : ''}</span>
                     </div>
                 </div>`;
         }
