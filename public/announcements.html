@@ -40,12 +40,46 @@
         </section>
     </header>
 
-    <div class="container grid-lg push-down-from-nav">
-        <h1>Welcome to DDD Scotland 2018</h1>
+    <div class="container grid-lg" style="padding-top:15px;">
+        <div class="columns">
+            <div class="column col-12">
+                <div class="form-group">
+                    <label class="form-label" for="announcement-text">Announcement:</label>
+                    <textarea class="form-input" id="announcement-text" placeholder="e.g. We are heading to the pub afterwards, come join us."
+                        rows="3"></textarea>
+                </div>
+            </div>
+            <div class="column col-12">
+                <button class="btn btn-primary float-right" id="send-announcement" style="margin-top:10px; margin-bottom:10px;">Send Announcement</button>
+            </div>
+        </div>
     </div>
 
     <script src="/js/register-service-worker.js"></script>
-    
+
+    <script>
+        document.querySelector('#send-announcement').addEventListener('click', event => {
+            event.preventDefault();
+
+            const announcementContent = document.getElementById('announcement-text').value;
+            document.getElementById('announcement-text').value = "";
+
+            fetch('/api/announcements', {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json'
+                },
+                body: JSON.stringify({
+                    message: announcementContent
+                })
+            })
+            .then(response => {
+                console.log('Successfully sent announcement')
+                return response;
+            })
+            .catch(error => alert('Failed to send annoucement'));
+        });        
+    </script>
 </body>
 
 </html>

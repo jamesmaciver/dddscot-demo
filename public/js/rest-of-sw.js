@@ -34,7 +34,8 @@ self.addEventListener('install', event => {
             'img/marniemccormack.jpg',
             'js/register-service-worker.js',
             'index.html',
-            'schedule.html'
+            'schedule.html',
+            'announcements.html'
           ])
           .catch(error => console.error('Failed to install service worker', error));
         })
